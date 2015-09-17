@@ -21,7 +21,7 @@ function workOnFile(){
 # abstract md5 command because it is platform specific
 function getHashOfFile(){
   local fileName=$1
-  md5 -q $fileName
+  md5 -q "$fileName"
 }
 
 function main(){
@@ -38,8 +38,8 @@ function main(){
     exit 1
   fi
 
-  for i in `find "$fromDir" -type f`; do
-    workOnFile "$i" "$toDir"
+  find "$fromDir" -type f | while read line; do
+    workOnFile "$line" "$toDir"
   done
 }
 
